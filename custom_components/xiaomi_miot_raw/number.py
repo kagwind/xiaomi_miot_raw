@@ -48,7 +48,6 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     SCHEMA
 )
 # pylint: disable=unused-argument
-@asyncio.coroutine
 async def async_setup_platform(hass, config, async_add_devices, discovery_info=None):
     hass.data[DOMAIN]['add_handler'].setdefault(TYPE, {})
     if 'config_entry' in config:
@@ -92,7 +91,7 @@ class MiotNumberInput(NumberEntity, MiotSubDevice):
             except Exception as ex:
                 _LOGGER.error(ex)
 
-    async def async_set_value(self, value):
+    async def async_set_native_value(self, value):
         result = await self._parent_device.set_property_new(self._full_did, value)
         if result:
             self._state_attrs[self._full_did] = value

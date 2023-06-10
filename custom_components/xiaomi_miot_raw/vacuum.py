@@ -87,7 +87,6 @@ STATE_MAPPING = {
 
 SCAN_INTERVAL = timedelta(seconds=10)
 # pylint: disable=unused-argument
-@asyncio.coroutine
 async def async_setup_platform(hass, config, async_add_devices, discovery_info=None):
     await async_generic_setup_platform(
         hass,
@@ -104,7 +103,6 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
 
 async def async_unload_entry(hass, config_entry, async_add_entities):
     return True
-
 class MiotVacuum(GenericMiotDevice, StateVacuumEntity):
     def __init__(self, device, config, device_info, hass, main_mi_type):
         GenericMiotDevice.__init__(self, device, config, device_info, hass, main_mi_type)
